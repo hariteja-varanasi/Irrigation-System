@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
+@Table(name = "Irrigation_System_History")
 public class IrrigationSystemHistoryEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)

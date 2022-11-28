@@ -11,6 +11,8 @@ public class PlotDTO {
     private Double availableSize;
     @JsonProperty(value = "crops")
     private List<CropDTO> cropDTOS;
+    @JsonProperty(value = "sensors")
+    private List<SensorDTO> sensors;
 
     public Integer getId() {
         return id;
@@ -42,6 +44,14 @@ public class PlotDTO {
 
     public void setCropDTOS(List<CropDTO> cropDTOS) {
         this.cropDTOS = cropDTOS;
+    }
+
+    public List<SensorDTO> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<SensorDTO> sensors) {
+        this.sensors = sensors;
     }
 
 }

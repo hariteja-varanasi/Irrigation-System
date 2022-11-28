@@ -2,9 +2,13 @@ package com.irrigation.system.api;
 
 import com.irrigation.system.model.CropDTO;
 import com.irrigation.system.model.PlotDTO;
+import com.irrigation.system.model.SensorDTO;
+import com.irrigation.system.model.StatusDTO;
 import com.irrigation.system.service.CropService;
 import com.irrigation.system.service.PlotService;
 
+import com.irrigation.system.service.SensorService;
+import com.irrigation.system.service.StatusService;
 import com.irrigation.system.util.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +29,12 @@ public class IrrigationSystemAPI {
 
     @Autowired
     private CropService cropService;
+
+    @Autowired
+    private SensorService sensorService;
+
+    @Autowired
+    private StatusService statusService;
 
     //PLOT CRUD METHODS
     @PostMapping("/plot/create")
@@ -102,6 +112,44 @@ public class IrrigationSystemAPI {
         try{
             String retString = cropService.deleteCrop(cropId);
             return ResponseEntity.status(HttpStatus.OK).body(retString);
+        }
+        catch (Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Sensor CRUD
+    @PostMapping("/sensor/create")
+    public ResponseEntity<Object> createSensor(@RequestBody SensorDTO sensorDTO){
+        try{
+            SensorDTO retSensorDTO = sensorService.createSensor(sensorDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(retSensorDTO);
+        }
+        catch (Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Status CRUD
+    @PostMapping("/status/create")
+    public ResponseEntity<Object> createStatus(@RequestBody StatusDTO statusDTO){
+        try{
+            StatusDTO retStatusDTO = statusService.createStatus(statusDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(retStatusDTO);
+        }
+        catch (Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/status/getByDesc")
+    public ResponseEntity<Object> getStatusByDescription(@RequestBody StatusDTO statusDTO){
+        try{
+            StatusDTO retStatusDTO = statusService.getStatusByDescription(statusDTO.getDescription());
+            return ResponseEntity.status(HttpStatus.OK).body(retStatusDTO);
         }
         catch (Exception e){
             logger.error(UtilityClass.converExceptionToString(e));

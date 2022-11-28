@@ -22,6 +22,9 @@ public class PlotEntity {
     @OneToMany(mappedBy = "plot", cascade = CascadeType.ALL)
     private List<CropEntity> crops;
 
+    @OneToMany(mappedBy = "plot", cascade = CascadeType.ALL)
+    private List<SensorEntity> sensors;
+
     public Integer getId() {
         return id;
     }
@@ -52,6 +55,14 @@ public class PlotEntity {
 
     public void setAvailableSize(Double availableSize) {
         this.availableSize = availableSize;
+    }
+
+    public List<SensorEntity> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<SensorEntity> sensors) {
+        this.sensors = sensors;
     }
 
 }

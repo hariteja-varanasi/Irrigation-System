@@ -4,9 +4,11 @@ package com.irrigation.system.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Status")
 public class StatusEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String description;
