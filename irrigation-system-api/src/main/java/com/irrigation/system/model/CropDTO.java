@@ -7,6 +7,7 @@ public class CropDTO {
     private Double supplyRequired;
     private Integer plotId;
     private Double cropSize;
+    private long minimumHoursNeeded;
 
     public Integer getId() {
         return id;
@@ -48,4 +49,11 @@ public class CropDTO {
         this.cropSize = cropSize;
     }
 
+    public long getMinimumHoursNeeded() {
+        return minimumHoursNeeded;
+    }
+
+    public void setMinimumHoursNeeded(long minimumHoursNeeded) {
+        this.minimumHoursNeeded = minimumHoursNeeded;
+    }
 }

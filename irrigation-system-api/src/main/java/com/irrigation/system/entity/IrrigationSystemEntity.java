@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class IrrigationSystemEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String description;

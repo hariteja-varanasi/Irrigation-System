@@ -1,14 +1,8 @@
 package com.irrigation.system.api;
 
-import com.irrigation.system.model.CropDTO;
-import com.irrigation.system.model.PlotDTO;
-import com.irrigation.system.model.SensorDTO;
-import com.irrigation.system.model.StatusDTO;
-import com.irrigation.system.service.CropService;
-import com.irrigation.system.service.PlotService;
+import com.irrigation.system.model.*;
+import com.irrigation.system.service.*;
 
-import com.irrigation.system.service.SensorService;
-import com.irrigation.system.service.StatusService;
 import com.irrigation.system.util.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +29,12 @@ public class IrrigationSystemAPI {
 
     @Autowired
     private StatusService statusService;
+
+    @Autowired
+    private IrrigationSystemService irrigationSystemService;
+
+    @Autowired
+    private IrrigationSystemHistoryService irrigationSystemHistoryService;
 
     //PLOT CRUD METHODS
     @PostMapping("/plot/create")
@@ -152,6 +152,44 @@ public class IrrigationSystemAPI {
             return ResponseEntity.status(HttpStatus.OK).body(retStatusDTO);
         }
         catch (Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Irrigation System CRUD
+    @PostMapping("/system/create")
+    public ResponseEntity<Object> createIrrigationSystem(@RequestBody IrrigationSystemDTO irrigationSystemDTO){
+        try{
+            IrrigationSystemDTO retIrrigationSystemDTO =irrigationSystemService.createIrrigationSystem(irrigationSystemDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(retIrrigationSystemDTO);
+        }
+        catch(Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Irrigation System History CRUD
+    @PostMapping("/system/start")
+    public ResponseEntity<Object> startIrrigationSystem(@RequestBody IrrigationSystemHistoryDTO irrigationSystemHistoryDTO){
+        try{
+            IrrigationSystemHistoryDTO retIrrigationSystemHistoryDTO = irrigationSystemHistoryService.irrigatePlot(irrigationSystemHistoryDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(retIrrigationSystemHistoryDTO);
+        }
+        catch(Exception e){
+            logger.error(UtilityClass.converExceptionToString(e));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/system/stop/{id}")
+    public ResponseEntity<Object> stopIrrigationSystem(@PathVariable Integer id){
+        try{
+            IrrigationSystemHistoryDTO retIrrigationSystemHistoryDTO = irrigationSystemHistoryService.stopPlotIrrigation(id);
+            return ResponseEntity.status(HttpStatus.OK).body(retIrrigationSystemHistoryDTO);
+        }
+        catch(Exception e){
             logger.error(UtilityClass.converExceptionToString(e));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

@@ -20,6 +20,9 @@ public class CropEntity {
     @Column(name = "supply_required")
     private Double supplyRequired;
 
+    @Column(name = "minimum_hours_needed")
+    private long minimumHoursNeeded;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plot_id")
     private PlotEntity plot;
@@ -64,4 +67,11 @@ public class CropEntity {
         this.cropSize = cropSize;
     }
 
+    public long getMinimumHoursNeeded() {
+        return minimumHoursNeeded;
+    }
+
+    public void setMinimumHoursNeeded(long minimumHoursNeeded) {
+        this.minimumHoursNeeded = minimumHoursNeeded;
+    }
 }

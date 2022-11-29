@@ -2,6 +2,7 @@ package com.irrigation.system.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,11 +29,15 @@ public class IrrigationSystemHistoryEntity {
     @JoinColumn(name = "system_id", referencedColumnName = "id")
     private IrrigationSystemEntity irrigationSystem;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "crop_id", referencedColumnName = "id")
+    private CropEntity cropEntity;
+
     @Column(name = "start_time")
-    private Timestamp startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "end_time")
-    private Timestamp endTime;
+    private LocalDateTime endTime;
 
     public Integer getId() {
         return id;
@@ -74,20 +79,27 @@ public class IrrigationSystemHistoryEntity {
         this.irrigationSystem = irrigationSystem;
     }
 
-    public Timestamp getStartTime() {
+    public CropEntity getCropEntity() {
+        return cropEntity;
+    }
+
+    public void setCropEntity(CropEntity cropEntity) {
+        this.cropEntity = cropEntity;
+    }
+
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-
 }

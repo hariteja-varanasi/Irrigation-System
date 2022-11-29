@@ -45,5 +45,24 @@ public class SensorServiceImpl implements SensorService {
         return retSensorDTO;
     }
 
+    @Override
+    public SensorDTO updateSensorStatus(SensorDTO sensorDTO, String description) throws Exception {
+        Optional<SensorEntity> optionalSensorEntity = sensorRepository.findById(sensorDTO.getId());
+        if(optionalSensorEntity.isEmpty()){
+            throw new Exception("Sensor not found!");
+        }
+        StatusEntity statusEntity = statusRepository.getStatusEntityByDesc(description);
+        if(statusEntity == null) {
+            throw new Exception("Invalid status!");
+        }
+        SensorEntity sensorEntity = optionalSensorEntity.get();
+        sensorEntity.setStatusEntity(statusEntity);
+        SensorEntity retSensorEntity = sensorRepository.save(sensorEntity);
+        SensorDTO retSensorDTO = new SensorDTO();
+        BeanUtils.copyProperties(retSensorEntity, retSensorDTO);
+        retSensorDTO.setPlotId(retSensorEntity.getPlot().getId());
+        return retSensorDTO;
+    }
+
 
 }
