@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "35cd8e9b-e4fb-4e42-a59e-8de73e6690bf",
+		"name": "Irrigation System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14298949"
+	},
+	"item": [
+		{
+			"name": "Plot",
+			"item": [
+				{
+					"name": "Create Plot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalSize\": 1000.0,\r\n    \"availableSize\": 1000.0,\r\n    \"crops\": [\r\n        {\r\n            \"name\": \"Test Crop One\",\r\n            \"cropSize\": 100.0,\r\n            \"supplyRequired\": 100.0            \r\n        },\r\n        {\r\n            \"name\": \"Test Crop Two\",\r\n            \"cropSize\": 200.0,\r\n            \"supplyRequired\": 100.0            \r\n        }\r\n    ],\r\n    \"sensors\": [\r\n        {\r\n            \"status\": \"IDLE\"\r\n        },\r\n        {\r\n            \"status\": \"IDLE\"\r\n        },\r\n        {\r\n            \"status\": \"IDLE\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/plot/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"plot",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Plots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/plots",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"plots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Plot",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"totalSize\": 1000.0,\r\n    \"availableSize\": 700.0,\r\n    \"crops\": [\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Test Crop One\",\r\n            \"supplyRequired\": 100.0,\r\n            \"plotId\": 3,\r\n            \"cropSize\": 100.0\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"name\": \"Test Crop Two\",\r\n            \"supplyRequired\": 100.0,\r\n            \"plotId\": 3,\r\n            \"cropSize\": 200.0\r\n        }\r\n    ],\r\n    \"sensors\": [\r\n        {\r\n            \"id\": 6,\r\n            \"plot_id\": 3,\r\n            \"status\": \"RUNNING\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"plot_id\": 3,\r\n            \"status\": \"RUNNING\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/plot/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"plot",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Plot",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/plot/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"plot",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crop",
+			"item": [
+				{
+					"name": "Create Crop",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Crop Four\",\r\n    \"cropSize\": 200.0,\r\n    \"supplyRequired\": 100.0,\r\n    \"plotId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/crop/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"crop",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Crops",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/crops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"crops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Crop",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 2,\r\n        \"name\": \"Test Crop One\",\r\n        \"supplyRequired\": 100.0,\r\n        \"plotId\": 1,\r\n        \"cropSize\": 300.0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/crop/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"crop",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/crop/delete/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"crop",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sensor",
+			"item": [
+				{
+					"name": "Create a Sensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plot_id\": 2,\r\n    \"status\": \"IDLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/sensor/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"sensor",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Create a Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"RUNNING\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/status/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"status",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Status By Description",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"IDLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/status/getByDesc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"status",
+								"getByDesc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Irrigation System",
+			"item": [
+				{
+					"name": "Stop Irrigation System",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/system/stop/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"system",
+								"stop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Irrigation System",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/system/stop/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"system",
+								"stop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Irrigation System",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plot_id\": 1,\r\n    \"sensor_id\": 1,\r\n    \"irrigation_system_id\": 1,\r\n    \"crop_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/system/start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"system",
+								"start"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
